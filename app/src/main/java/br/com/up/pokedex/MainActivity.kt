@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val editPesquisa : TextInputEditText = findViewById(R.id.text_input_search_pokemon)
+        val edtSearch : TextInputEditText = findViewById(R.id.text_input_search_pokemon)
 
         val recyclerView : RecyclerView =
             findViewById(R.id.recycler_pokemons)
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        editPesquisa.addTextChangedListener(object : TextWatcher {
+        edtSearch.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                             PokeAdapter(listaPokemons) { pokemon ->
                                 val intent = Intent(
                                   applicationContext,
-                                  DetalhesActivity::class.java
+                                  ActivityPokeDetalhes::class.java
                                 )
                                 intent.putExtra("id", pokemon.id())
                                startActivity(intent)

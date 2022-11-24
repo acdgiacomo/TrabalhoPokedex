@@ -11,7 +11,7 @@ import br.com.up.pokedex.model.Pokemon
 import com.squareup.picasso.Picasso
 
 class PokeAdapter(
-    private val pokemons: List<Pokemon>,
+    private val listDePokemon: List<Pokemon>,
     private val listener:(pokemon: Pokemon) -> Unit) :
     RecyclerView.Adapter
     <PokeAdapter.PokeViewHolder>() {
@@ -22,30 +22,29 @@ class PokeAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
-        val layout = inflater
-            .inflate(R.layout.view_poke_item,
-                                    parent,
-                                    false)
+        val layout = inflater.inflate(R.layout.view_poke_item, parent, false)
 
         return PokeViewHolder(layout)
     }
 
     override fun onBindViewHolder(holder: PokeViewHolder, position: Int) {
 
-        val pokemon = pokemons[position]
+        val umPokemon = listDePokemon[position]
 
-        val url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id()}.png"
+        val uri = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${umPokemon.id()}.png"
 
-        val imageView : ImageView = holder.itemView.findViewById(R.id.image_pokemon)
+        val imgView : ImageView = holder.itemView.findViewById(R.id.image_pokemon)
 
         holder.itemView.setOnClickListener {
-            listener(pokemon)
+            listener(umPokemon)
         }
 
-        Picasso.get().load(url).into(imageView)
+        Picasso.get().load(uri).into(imgView)
     }
 
     override fun getItemCount(): Int {
-        return pokemons.size
+        val quantidadePokemons = listDePokemon.size
+
+        return quantidadePokemons
     }
 }
